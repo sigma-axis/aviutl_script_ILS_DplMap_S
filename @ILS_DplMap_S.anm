@@ -1,0 +1,87 @@
+--[[
+MIT License
+Copyright (c) 2024 sigma-axis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+https://mit-license.org/
+]]
+
+--
+-- VERSION: v1.00
+--
+
+--------------------------------
+
+@Displacement Map設定(拡大率指定)
+--track0:X,-2000,2000,0,0.1
+--track1:Y,-2000,2000,0,0.1
+--track2:回転,-720,720,0,0.01
+--track3:拡大率,0,1600,100,0.01
+--dialog:縦横比(%),_1=0.0;PI,_0=nil;
+obj.setanchor("track", 0);
+local x, y, angle, scale, aspect = obj.track0, obj.track1, obj.track2, obj.track3, tonumber(_1) or 0; _1 = nil;
+if _0 then
+	local t0, t1, t2, t3 = _0[1], _0[2], _0[3], _0[4]; _0 = nil;
+	x = tonumber(t0) or x;
+	y = tonumber(t1) or y;
+	angle = tonumber(t2) or angle;
+	scale = tonumber(t3) or scale;
+end
+local ils_dmap = require "ILS_DplMap_S";
+ils_dmap.settings_byscale(x, y, angle, scale / 100, aspect / 100);
+
+@Displacement Map設定(サイズ指定)
+--track0:X,-2000,2000,0,0.1
+--track1:Y,-2000,2000,0,0.1
+--track2:回転,-720,720,0,0.01
+--track3:サイズ,0,4000,200,1
+--dialog:縦横比(%),_1=0.0;PI,_0=nil;
+obj.setanchor("track", 0);
+local x, y, angle, size, aspect = obj.track0, obj.track1, obj.track2, obj.track3, tonumber(_1) or 0; _1 = nil;
+if _0 then
+	local t0, t1, t2, t3 = _0[1], _0[2], _0[3], _0[4]; _0 = nil;
+	x = tonumber(t0) or x;
+	y = tonumber(t1) or y;
+	angle = tonumber(t2) or angle;
+	size = tonumber(t3) or size;
+end
+local ils_dmap = require "ILS_DplMap_S";
+ils_dmap.settings_bysize(x, y, angle, size, aspect / 100);
+
+@Displacement Map
+--track0:パラメタ1,-2000,2000,0
+--track1:パラメタ2,-2000,2000,0
+--track2:ぼかし,0,200,5,1
+--track3:変形方法,1,3,1,1
+--dialog:ILシーン名,_1="scn1";現在フレーム/chk,_2=0;PI,_0=nil;
+local def_x, def_y, blur, deform, name, curr_frame = obj.track0, obj.track1, obj.track2, obj.track3, _1, _2 ~= 0;
+_1 = nil; _2 = nil;
+if _0 then
+	local t0, t1, t2, t3 = _0[1], _0[2], _0[3], _0[4]; _0 = nil;
+	def_x = tonumber(t0) or def_x;
+	def_y = tonumber(t1) or def_y;
+	blur = tonumber(t2) or blur;
+	deform = tonumber(t3) or deform;
+end
+local ils_dmap = require "ILS_DplMap_S";
+local recall_settings = ils_dmap.is_former_script(
+	"Displacement Map設定(拡大率指定)",
+	"Displacement Map設定(サイズ指定)");
+ils_dmap.apply(name, def_x, def_y, deform, blur, curr_frame, recall_settings);
