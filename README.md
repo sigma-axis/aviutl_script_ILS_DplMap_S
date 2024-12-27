@@ -4,7 +4,7 @@
 
 フィルタ効果のディスプレイスメントマップで，マップ元画像としてシーンを選択した場合の「inline scene 版」です．
 
-[ダウンロードはこちら．](https://github.com/sigma-axis/aviutl_script_ILS_DplMap_S/releases) \[紹介動画準備中...．\]
+[ダウンロードはこちら．](https://github.com/sigma-axis/aviutl_script_ILS_DplMap_S/releases) [紹介動画](https://www.nicovideo.jp/watch/sm44468536)
 
 ![ディスプレイスメントマップのデモ](https://github.com/user-attachments/assets/fd534cba-d405-4d96-9e8d-fcdfd82178a8)
 
